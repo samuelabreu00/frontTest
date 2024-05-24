@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 import imgLogo from "../../../assets/MKS.svg"
 import imgLogo2 from "../../../assets/Sistemas.svg"
 import imgCart from "../../../assets/Vector.svg"
+import ShoppingCart from "../cart/Cart";
 
 const GlobalStyle = createGlobalStyle`
 *{
