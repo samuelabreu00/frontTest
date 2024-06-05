@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import imgApple from "../../../assets/apple-watch.svg"
+
 
 const Item = styled.div`
 width: 100%;
@@ -41,7 +41,7 @@ const CartItem = () => {
     return (
         <>
             <Item>
-                <ImgExemple src={imgApple} alt="" />
+                <ImgExemple alt="" />
 
                 <Name> </Name>
 

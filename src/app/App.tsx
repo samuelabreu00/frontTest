@@ -1,7 +1,7 @@
 import Header from '../views/components/header/Header'
 import Products from '../views/components/products/Products'
 import Footer from '../views/components/footer/Footer'
-import Cart  from '../views/components/cart/Cart'
+// import Cart  from '../views/components/cart/Cart'
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
      <Header/>
      <Products/>
      <Footer/>
-    
+     {/* <Cart/> */}
     </>
   )
 }
