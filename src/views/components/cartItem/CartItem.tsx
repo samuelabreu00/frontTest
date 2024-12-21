@@ -1,4 +1,7 @@
 import styled from "styled-components"
+import { Product } from "../../../Context/cartContext"
+import { CartContext } from "../../../Context/cartContext"
+import { useContext } from "react"
 
 
 const Item = styled.div`
@@ -35,26 +38,21 @@ line-height: 17px;
 color: #000;
 
 `
-const CartItem = () => {
-   
-
+const CartItem: React.FC<{ product: Product }> = ({ product }) => {
+    const { incrementQuantity, decrementQuantity } = useContext(CartContext)!;
+  
     return (
-        <>
-            <Item>
-                <ImgExemple alt="" />
-
-                <Name> </Name>
-
-                <div className="containerQuant">
-                    <button className="lessQuant">-</button>
-                    <p>1</p>
-                    <button className="moreQuant">+</button>
-                </div>
-
-                <Price>R$</Price>
-            </Item>
-        </>
-    )
-}
-
-export default CartItem
+      <Item>
+        <ImgExemple src={product.image} alt={product.title} />
+        <Name>{product.title}</Name>
+        <div className="containerQuant">
+          <button className="lessQuant" onClick={() => decrementQuantity(product.id)}>-</button>
+          <p>{product.quantity}</p>
+          <button className="moreQuant" onClick={() => incrementQuantity(product.id)}>+</button>
+        </div>
+        <Price>R${(product.price * product.quantity).toFixed(2)}</Price>
+      </Item>
+    );
+  };
+  
+  export default CartItem;

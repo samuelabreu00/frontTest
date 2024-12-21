@@ -1,7 +1,8 @@
-import styled from "styled-components"
+import styled, { keyframes } from 'styled-components';
 import Items from "../items/Items"
 import { useState , useEffect} from "react"
 import { api } from "../../../axios/config"
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const Main = styled.main`
     min-height: 100vh;
@@ -12,7 +13,7 @@ const Main = styled.main`
 `
 
 const ContainerMain = styled.div`
-    max-width: 938px;
+    max-width: 1350px;
     margin: 0 auto;
     box-sizing: content-box;
     padding: 5rem 24px;
@@ -21,16 +22,33 @@ const ContainerMain = styled.div`
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 1.2rem;
+    gap: 3rem 1.2rem;
 `
+const rotate = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+const LoadingIcon = styled(AiOutlineLoading3Quarters)`
+  animation: ${rotate} 1s infinite ease-in-out;
+  font-size: 5rem; 
+  color: #555; 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
 
 interface Products {
     id: number;
-    name: string;
+    title: string;
     brand: string;
     description: string;
     price: number;
-    photo: string;
+    image: string;
   }
   
 const Products = () => {
@@ -38,13 +56,14 @@ const Products = () => {
     const [productList, setProductList] = useState<Products[]>([]);
 
     useEffect(() => {
+  
         fetchProduct();
       }, []);
     
       async function fetchProduct() {
         try{
           const products = await api.getProducts();
-        setProductList(products.products);
+        setProductList(products);
         }catch (error) {
           console.error("Erro ao obter produtos:", error)
         }
@@ -55,18 +74,20 @@ const Products = () => {
     <>
     <Main>
         <ContainerMain>
-        {productList.map(product => (
-        <div key={product.id}>
-           <Items
-            photo={product.photo}
-            id={product.id}
-            name={product.name}
-            brand={product.brand} 
-            description={product.description}
-            price={product.price}/>
-        </div>
-      
-      ))}
+        
+          {productList.length > 0 ? (
+            productList.map((product) =>(
+              <Items
+                image={product.image}
+                id={product.id}
+                title={product.title}
+                brand={product.brand}
+                price={product.price}
+              />
+            ))
+          ):(
+            <LoadingIcon />
+          )} 
         </ContainerMain>
     </Main>
     </>
