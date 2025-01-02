@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
 import styled, { createGlobalStyle } from "styled-components";
-import imgCart from "../../../assets/Vector.svg";
-import { CartContext } from "../../../Context/cartContext";
+import imgCart from "../../assets/Vector.svg";
+import { CartContext } from "../../Context/cartContext";
+import { useCart } from "../../Hooks/useCart";
+import Cart from "../cart/Cart";
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -59,18 +61,13 @@ const NumberCart = styled.p`
   font-weight: 700;
 `;
 
-
-
-
 const Header: React.FC = () => {
-    const cartContext = useContext(CartContext);
-    if (!cartContext) return null; 
-    const { productsCart } = cartContext;
-    const totalItems = productsCart.reduce((total, product) => total + product.quantity, 0);
+  const cartContext = useContext(CartContext);
+  if (!cartContext) return null;
+  const { productsCart } = cartContext;
+  const totalItems = productsCart.reduce((total, product) => total + product.quantity, 0);
 
-    const handleOpenCart = () =>{
-      
-    }
+  const { isCartVisible, handleOpenCart, handleCloseCart } = useCart();
 
   return (
     <>
@@ -79,11 +76,12 @@ const Header: React.FC = () => {
         <ContainerHeader>
           <ContainerLogo>Logo</ContainerLogo>
           <ContainerCart>
-            <ImgCart src={imgCart} alt="Carrinho" />
+            <ImgCart onClick={handleOpenCart} src={imgCart} alt="Carrinho" />
             <NumberCart>{totalItems}</NumberCart>
           </ContainerCart>
         </ContainerHeader>
       </HeaderStyle>
+      {isCartVisible && <Cart handleCloseCart={handleCloseCart} />}
     </>
   );
 };

@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import { Product } from "../../../Context/cartContext"
-import { CartContext } from "../../../Context/cartContext"
+import { Product } from "../../Context/cartContext"
+import { CartContext } from "../../Context/cartContext"
 import { useContext } from "react"
 
 

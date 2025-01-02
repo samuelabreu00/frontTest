@@ -3,7 +3,7 @@
 import styled from "styled-components";
 import { FaCartPlus } from "react-icons/fa6";
 import { useContext } from "react";
-import { CartContext } from "../../../Context/cartContext"; 
+import { CartContext } from "../../Context/cartContext"; 
 
 const ContainerItemns = styled.div`
   box-shadow: 0px 2px 8px 0px #00000043;
@@ -106,9 +106,8 @@ interface CartProductProps {
   id: number;
   image: string;
 }
-
-const Items: React.FC<CartProductProps> = ({ title, description, price, image, brand, id }) => {
-  const { addProductCart } = useContext(CartContext); 
+const Items: React.FC<CartProductProps> = ({ title, price, image, id }) => {
+  const { addProductCart }: any = useContext(CartContext); 
 
   const handleAddToCart = () => {
     addProductCart({
@@ -116,7 +115,7 @@ const Items: React.FC<CartProductProps> = ({ title, description, price, image, b
       title,
       price,
       image,
-      quantity: 1, // Começa com quantidade 1
+      quantity: 1,
     });
   };
 

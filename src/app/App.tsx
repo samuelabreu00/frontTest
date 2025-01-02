@@ -1,9 +1,9 @@
 // App.tsx
-import Header from '../views/components/header/Header'
-import Products from '../views/components/products/Products'
-import Footer from '../views/components/footer/Footer'
+import Header from '../components/header/Header'
+import Products from '../components/products/Products'
+import Footer from '../components/footer/Footer'
 import { CartProvider } from "../Context/cartContext"  
-import Cart from '../views/components/cart/Cart'  
+
 
 function App() {
   return (
@@ -11,7 +11,6 @@ function App() {
       <Header />
       <Products />
       <Footer />
-      <Cart />  {/* Descomente esta linha para exibir o carrinho */}
     </CartProvider>
   )
 }

@@ -1,7 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 import Items from "../items/Items"
 import { useState , useEffect} from "react"
-import { api } from "../../../axios/config"
+import { api } from "../../axios/config"
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const Main = styled.main`
@@ -78,6 +78,7 @@ const Products = () => {
           {productList.length > 0 ? (
             productList.map((product) =>(
               <Items
+                key={product.id}
                 image={product.image}
                 id={product.id}
                 title={product.title}
