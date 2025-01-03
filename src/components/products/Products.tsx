@@ -1,4 +1,4 @@
-// components/items/Items.tsx
+
 
 import styled from "styled-components";
 import { FaCartPlus } from "react-icons/fa6";
@@ -113,7 +113,6 @@ const Desconto = styled.div`
   font-weight: 600;
 `
 
-
 interface CartProductProps{
   title: string;
   description: string;
@@ -122,6 +121,7 @@ interface CartProductProps{
   id: number;
   image: string;
 }
+
 const Items: React.FC<CartProductProps> = ({ title, price, image, id }) => {
   const { addProductCart }: any = useContext(CartContext); 
 

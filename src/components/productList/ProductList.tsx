@@ -1,9 +1,10 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import Items from "../products/Products";
-import { useState , useEffect } from "react";
-import { api } from "../../axios/config";
 import Skeleton from 'react-loading-skeleton'; 
 import 'react-loading-skeleton/dist/skeleton.css';  
+import { useProducts } from '../../Hooks/useProducts';
+
+
 const Main = styled.main`
     min-height: 100vh;
     display: flex;
@@ -34,54 +35,39 @@ interface Products {
   image: string;
 }
 
-
 const Products = () => {
-  const [productList, setProductList] = useState<Products[]>([]);
+  const { data } = useProducts();
 
-  useEffect(() => {
-    fetchProduct();
-  }, []);
-
-  async function fetchProduct() {
-    try {
-      const products = await api.getProducts();
-      setProductList(products);
-    } catch (error) {
-      console.error("Erro ao obter produtos:", error);
-    }
+  if (!data) { 
+    return (
+      <Main>
+        <ContainerMain>
+          {[...Array(20)].map((_, index) => (
+            <div key={index} style={{ width: '300px', minHeight: '280px' }}>
+              <Skeleton height={280} width={300} />
+            </div>
+          ))}
+        </ContainerMain>
+      </Main>
+    );
   }
 
   return (
-    <>
-      <Main>
-        <ContainerMain>
-          {productList.length > 0 ? (
-
-            productList.map((product) => (
-              <Items
-                key={product.id}
-                image={product.image}
-                id={product.id}
-                title={product.title}
-                brand={product.brand}
-                price={product.price}
-              />
-            ))
-          ) : (
-            <>
-
-              {[...Array(20)].map((_, index) => (
-                <div key={index} style={{ width: '300px', minHeight: '280px' }}>
-                  <Skeleton height={280} width={300} />
-                  
-                </div>
-              ))}
-            </>
-          )}
-        </ContainerMain>
-      </Main>
-    </>
+    <Main>
+      <ContainerMain>
+        {data.map((product: Products) => (
+          <Items
+            key={product.id}
+            image={product.image}
+            id={product.id}
+            title={product.title}
+            brand={product.brand}
+            price={product.price}
+          />
+        ))}
+      </ContainerMain>
+    </Main>
   );
 };
 
-export default Products;
+export default Products
