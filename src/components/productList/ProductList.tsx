@@ -1,16 +1,17 @@
 import styled, { keyframes } from 'styled-components';
-import Items from "../products/Products"
-import { useState , useEffect} from "react"
-import { api } from "../../axios/config"
+import Items from "../products/Products";
+import { useState , useEffect } from "react";
+import { api } from "../../axios/config";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import Skeleton from 'react-loading-skeleton';  // Importando a biblioteca de Skeleton
+import 'react-loading-skeleton/dist/skeleton.css';  // Estilos do Skeleton
 
 const Main = styled.main`
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-
-`
+`;
 
 const ContainerMain = styled.div`
     max-width: 1350px;
@@ -23,7 +24,8 @@ const ContainerMain = styled.div`
     justify-content: center;
     flex-wrap: wrap;
     gap: 3rem 1.8rem;
-`
+`;
+
 const rotate = keyframes`
   0% {
     transform: rotate(0deg);
@@ -32,6 +34,7 @@ const rotate = keyframes`
     transform: rotate(360deg);
   }
 `;
+
 const LoadingIcon = styled(AiOutlineLoading3Quarters)`
   animation: ${rotate} 1s infinite ease-in-out;
   font-size: 5rem; 
@@ -43,40 +46,37 @@ const LoadingIcon = styled(AiOutlineLoading3Quarters)`
 `;
 
 interface Products {
-    id: number;
-    title: string;
-    brand: string;
-    description: string;
-    price: number;
-    image: string;
-  }
-  
+  id: number;
+  title: string;
+  brand: string;
+  description: string;
+  price: number;
+  image: string;
+}
+
 const Products = () => {
+  const [productList, setProductList] = useState<Products[]>([]);
 
-    const [productList, setProductList] = useState<Products[]>([]);
+  useEffect(() => {
+    fetchProduct();
+  }, []);
 
-    useEffect(() => {
-  
-        fetchProduct();
-      }, []);
-    
-      async function fetchProduct() {
-        try{
-          const products = await api.getProducts();
-        setProductList(products);
-        }catch (error) {
-          console.error("Erro ao obter produtos:", error)
-        }
-        
-      } 
+  async function fetchProduct() {
+    try {
+      const products = await api.getProducts();
+      setProductList(products);
+    } catch (error) {
+      console.error("Erro ao obter produtos:", error);
+    }
+  }
 
   return (
     <>
-    <Main>
+      <Main>
         <ContainerMain>
-        
           {productList.length > 0 ? (
-            productList.map((product) =>(
+
+            productList.map((product) => (
               <Items
                 key={product.id}
                 image={product.image}
@@ -86,13 +86,21 @@ const Products = () => {
                 price={product.price}
               />
             ))
-          ):(
-            <LoadingIcon />
-          )} 
-        </ContainerMain>
-    </Main>
-    </>
-  )
-}
+          ) : (
+            <>
 
-export default Products
+              {[...Array(20)].map((_, index) => (
+                <div key={index} style={{ width: '300px', minHeight: '280px' }}>
+                  <Skeleton height={280} width={300} />
+                  
+                </div>
+              ))}
+            </>
+          )}
+        </ContainerMain>
+      </Main>
+    </>
+  );
+};
+
+export default Products;

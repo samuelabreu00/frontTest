@@ -15,6 +15,15 @@ const Section = styled.section`
   box-shadow: -5px 0 6px 0 #00000051;
   z-index: 10;
 `;
+const Adc = styled.p`
+  color: #bebebe;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 40px;
+`;
 
 const ContainerCart = styled.div`
   width: 100%;
@@ -130,7 +139,7 @@ const Cart: React.FC<CartProps> = ({ handleCloseCart }) => {
         </HeaderCart>
 
       <ContainerCart>
-        {productsCart.length === 0 ? <p>Ainda não a itens adicionados</p> : null}
+        {productsCart.length === 0 ? <Adc> Ainda não a itens adicionados ao seu carrinho.</Adc> : null}
         {productsCart.map((product) => (
           <CartItem key={product.id} product={product} />
         ))}
