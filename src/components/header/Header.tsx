@@ -50,6 +50,7 @@ const ContainerCart = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 const ImgCart = styled.img`
@@ -64,6 +65,7 @@ const NumberCart = styled.p`
 const Header: React.FC = () => {
   const cartContext = useContext(CartContext);
   if (!cartContext) return null;
+  
   const { productsCart } = cartContext;
   const totalItems = productsCart.reduce((total, product) => total + product.quantity, 0);
 
@@ -75,8 +77,8 @@ const Header: React.FC = () => {
       <HeaderStyle>
         <ContainerHeader>
           <ContainerLogo>Logo</ContainerLogo>
-          <ContainerCart>
-            <ImgCart onClick={handleOpenCart} src={imgCart} alt="Carrinho" />
+          <ContainerCart onClick={handleOpenCart}>
+            <ImgCart src={imgCart} alt="Carrinho" />
             <NumberCart>{totalItems}</NumberCart>
           </ContainerCart>
         </ContainerHeader>

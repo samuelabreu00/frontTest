@@ -18,7 +18,7 @@ const Footer = () => {
   return (
    <>
    <FooterContent>
-        <TextFooter>MKS sistemas &copy; Todos os direitos reservados</TextFooter>
+        <TextFooter> &copy; Todos os direitos reservados</TextFooter>
    </FooterContent>
    </>
   )

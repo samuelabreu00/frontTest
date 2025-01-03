@@ -1,6 +1,6 @@
 // App.tsx
 import Header from '../components/header/Header'
-import Products from '../components/products/Products'
+import Products from '../components/productList/ProductList'
 import Footer from '../components/footer/Footer'
 import { CartProvider } from "../Context/cartContext"  
 

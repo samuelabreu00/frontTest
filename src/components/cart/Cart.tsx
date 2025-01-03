@@ -7,34 +7,53 @@ import CartItem from "../cartItem/CartItem";
 const Section = styled.section`
   height: 100vh;
   background-color: #0f52ba;
-  width: 486px;
+  width: 700px;
   position: fixed;
   right: 0;
   top: 0;
-  padding: 33px 0;
+  padding: 33px 10px 0 0;
   box-shadow: -5px 0 6px 0 #00000051;
   z-index: 10;
 `;
 
 const ContainerCart = styled.div`
-  max-width: 400px;
-  margin: 0 auto;
+  width: 100%;
+  padding: 0 24px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
+  justify-content: start;
+  gap: 1rem;
+  height: 60vh;
+  overflow-y: auto;
+  
+  &::-webkit-scrollbar {
+    width: 8px; 
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #3a89ff; 
+    border-radius: 10px; 
+    border: 2px solid #f0f0f0; 
+  }
+  &::-webkit-scrollbar-track {
+    background-color: #f0f0f0; 
+    border-radius: 10px; 
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #2878d1; 
+  }
 `;
+
 
 const HeaderCart = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   gap: 10px;
   align-items: center;
+  margin-bottom: 3rem;
 `;
 
 const Title = styled.h1`
-  width: 170px;
-  height: 56px;
+  width: auto;
   font-weight: 700;
   font-size: 27px;
   color: #fff;
@@ -49,6 +68,36 @@ const ButtonX = styled.button`
   color: #fff;
   border: none;
   cursor: pointer;
+`;
+const TotalValueContainer = styled.div`
+display: flex;
+justify-content: space-around;
+align-items: center;
+margin-top: 3rem;
+> p{
+  font-size: 20px;
+  color: #fff;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+> button{
+  background-color: #fff;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #001c46;
+  padding: 10px;
+  border-radius: 30px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all .3s;
+  
+  &:hover {
+    opacity: .8;
+  }
+}
 `;
 
 interface CartProps {
@@ -75,21 +124,22 @@ const Cart: React.FC<CartProps> = ({ handleCloseCart }) => {
 
   return (
     <Section>
-      <ContainerCart>
-        <HeaderCart>
+      <HeaderCart>
           <Title>Carrinho de Compras</Title>
           <ButtonX onClick={handleCloseCart}>X</ButtonX>
         </HeaderCart>
 
+      <ContainerCart>
+        {productsCart.length === 0 ? <p>Ainda não a itens adicionados</p> : null}
         {productsCart.map((product) => (
           <CartItem key={product.id} product={product} />
         ))}
-
-        <div>
+      </ContainerCart>
+      
+      <TotalValueContainer>
           <p>Valor total: R${totalPrice.toFixed(2)}</p>
           <button>Finalizar Compra</button>
-        </div>
-      </ContainerCart>
+      </TotalValueContainer>
     </Section>
   );
 };

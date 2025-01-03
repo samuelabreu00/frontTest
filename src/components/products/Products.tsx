@@ -1,98 +1,160 @@
-import styled, { keyframes } from 'styled-components';
-import Items from "../items/Items"
-import { useState , useEffect} from "react"
-import { api } from "../../axios/config"
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+// components/items/Items.tsx
 
-const Main = styled.main`
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+import styled from "styled-components";
+import { FaCartPlus } from "react-icons/fa6";
+import { useContext, useEffect, useState } from "react";
+import { CartContext } from "../../Context/cartContext"; 
 
-`
+const ContainerItemns = styled.div`
+  box-shadow: 0px 2px 8px 0px #00000043;
+  width: 300px;
+  min-height: 280px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  padding-bottom: 1rem;
+`;
 
-const ContainerMain = styled.div`
-    max-width: 1350px;
-    margin: 0 auto;
-    box-sizing: content-box;
-    padding: 5rem 24px;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 3rem 1.2rem;
-`
-const rotate = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
+const ImgProduct = styled.img`
+  width: 129px;
+  height: 170px;
+  padding: 18px 0;
+  cursor: pointer;
+  overflow: visible;
+  display: block;
+  transition: .3s;
+  &:hover {
+    transform: scale(1.1);
   }
 `;
-const LoadingIcon = styled(AiOutlineLoading3Quarters)`
-  animation: ${rotate} 1s infinite ease-in-out;
-  font-size: 5rem; 
-  color: #555; 
+
+const Descriptions = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 14px;
+  gap: 10px 0;
+`;
+
+const Info = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+`;
+
+const NameProduct = styled.p`
+  font-size: 16px;
+  font-weight: 400;
+  width: 280px;
+  height: 38px;
+  line-height: 19px;
+  color: #2c2c2c;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const PriceProduct = styled.p`
+  font-size: 15px;
+  font-weight: 700;
+  width: 100px;
+  height: 26px;
+  line-height: 19px;
+  color: #fff;
+  border-radius: 5px;
+  background-color: #373737;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
 `;
 
-interface Products {
-    id: number;
-    title: string;
-    brand: string;
-    description: string;
-    price: number;
-    image: string;
+const Button = styled.button`
+  width: 80%;
+  height: 40px;
+  border-radius: 22px;
+  border: none;
+  outline: none;
+  background-color: #3a89ff;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  z-index: 1;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: .3s;
+  &:hover {
+    opacity: .8;
   }
-  
-const Products = () => {
+`;
 
-    const [productList, setProductList] = useState<Products[]>([]);
+const Desconto = styled.div`
+  position: absolute;
+  right: -18px;
+  top: -18px;
+  background-color: #ff1919;
+  color: #fff;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+`
 
-    useEffect(() => {
-  
-        fetchProduct();
-      }, []);
-    
-      async function fetchProduct() {
-        try{
-          const products = await api.getProducts();
-        setProductList(products);
-        }catch (error) {
-          console.error("Erro ao obter produtos:", error)
-        }
-        
-      } 
 
-  return (
-    <>
-    <Main>
-        <ContainerMain>
-        
-          {productList.length > 0 ? (
-            productList.map((product) =>(
-              <Items
-                key={product.id}
-                image={product.image}
-                id={product.id}
-                title={product.title}
-                brand={product.brand}
-                price={product.price}
-              />
-            ))
-          ):(
-            <LoadingIcon />
-          )} 
-        </ContainerMain>
-    </Main>
-    </>
-  )
+interface CartProductProps{
+  title: string;
+  description: string;
+  brand: string;
+  price: number;
+  id: number;
+  image: string;
 }
+const Items: React.FC<CartProductProps> = ({ title, price, image, id }) => {
+  const { addProductCart }: any = useContext(CartContext); 
 
-export default Products
+  const handleAddToCart = () => {
+    addProductCart({
+      id,
+      title,
+      price,
+      image,
+      quantity: 1,
+    });
+  };
+
+ 
+  
+  const formattedPrice = price.toFixed(2);
+  return (
+    <ContainerItemns>
+      <ImgProduct src={image} alt={title} />
+      <Descriptions>
+        <Info>
+          <NameProduct>{title}</NameProduct>
+          <PriceProduct>R${formattedPrice}</PriceProduct>
+          {price < 100 ? <Desconto>50%</Desconto> : null}
+        </Info>
+      </Descriptions>
+      <Button onClick={handleAddToCart}>
+        <FaCartPlus />
+        Add to cart
+      </Button>
+    </ContainerItemns>
+  );
+
+};
+
+export default Items;
