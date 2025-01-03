@@ -2,7 +2,7 @@
 
 import styled from "styled-components";
 import { FaCartPlus } from "react-icons/fa6";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { CartContext } from "../../Context/cartContext"; 
 
 const ContainerItemns = styled.div`
@@ -153,6 +153,7 @@ const Items: React.FC<CartProductProps> = ({ title, price, image, id }) => {
         Add to cart
       </Button>
     </ContainerItemns>
+  
   );
 
 };

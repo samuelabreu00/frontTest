@@ -2,10 +2,8 @@ import styled, { keyframes } from 'styled-components';
 import Items from "../products/Products";
 import { useState , useEffect } from "react";
 import { api } from "../../axios/config";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import Skeleton from 'react-loading-skeleton';  // Importando a biblioteca de Skeleton
-import 'react-loading-skeleton/dist/skeleton.css';  // Estilos do Skeleton
-
+import Skeleton from 'react-loading-skeleton'; 
+import 'react-loading-skeleton/dist/skeleton.css';  
 const Main = styled.main`
     min-height: 100vh;
     display: flex;
@@ -26,24 +24,6 @@ const ContainerMain = styled.div`
     gap: 3rem 1.8rem;
 `;
 
-const rotate = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-`;
-
-const LoadingIcon = styled(AiOutlineLoading3Quarters)`
-  animation: ${rotate} 1s infinite ease-in-out;
-  font-size: 5rem; 
-  color: #555; 
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
 
 interface Products {
   id: number;
@@ -53,6 +33,7 @@ interface Products {
   price: number;
   image: string;
 }
+
 
 const Products = () => {
   const [productList, setProductList] = useState<Products[]>([]);

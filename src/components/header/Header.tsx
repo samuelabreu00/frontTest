@@ -4,6 +4,7 @@ import imgCart from "../../assets/Vector.svg";
 import { CartContext } from "../../Context/cartContext";
 import { useCart } from "../../Hooks/useCart";
 import Cart from "../cart/Cart";
+import { HiMagnifyingGlass } from "react-icons/hi2";
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -41,6 +42,31 @@ const ContainerLogo = styled.div`
   font-weight: bold;
 `;
 
+const SearchLabel = styled.div`
+width: 450px;
+position: relative;
+>input{
+  width: 100%;
+  height: 40px;
+  font-size: 16px;
+  padding: 1rem;
+  border-radius: 19px;
+  border: none;
+  outline: none;
+  background-color: #e5e5e5;
+}
+>div{
+  position: absolute;
+  right: 0;
+  transform: translateY(-50%);
+  top: 53%;
+  right: 15px;
+  font-size: 20px;
+  color: #545454;
+  cursor: pointer;
+}
+`
+
 const ContainerCart = styled.div`
   background-color: #fff;
   width: 90px;
@@ -65,7 +91,7 @@ const NumberCart = styled.p`
 const Header: React.FC = () => {
   const cartContext = useContext(CartContext);
   if (!cartContext) return null;
-  
+
   const { productsCart } = cartContext;
   const totalItems = productsCart.reduce((total, product) => total + product.quantity, 0);
 
@@ -77,6 +103,9 @@ const Header: React.FC = () => {
       <HeaderStyle>
         <ContainerHeader>
           <ContainerLogo>Logo</ContainerLogo>
+
+          <SearchLabel><input type="text" placeholder="Pesquisar produto"/> <div><HiMagnifyingGlass /></div></SearchLabel>
+
           <ContainerCart onClick={handleOpenCart}>
             <ImgCart src={imgCart} alt="Carrinho" />
             <NumberCart>{totalItems}</NumberCart>
@@ -84,6 +113,7 @@ const Header: React.FC = () => {
         </ContainerHeader>
       </HeaderStyle>
       {isCartVisible && <Cart handleCloseCart={handleCloseCart} />}
+
     </>
   );
 };
