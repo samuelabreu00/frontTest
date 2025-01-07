@@ -70,6 +70,7 @@ const Header: React.FC = () => {
   if (!cartContext) return null;
 
   const {setSearch, search} = useFilter();
+  
 
   const { productsCart } = cartContext;
   const totalItems = productsCart.reduce((total, product) => total + product.quantity, 0);

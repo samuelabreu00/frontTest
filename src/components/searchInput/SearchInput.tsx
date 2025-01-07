@@ -38,6 +38,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
 }
 
 const SearchInput = (props: InputProps) =>{
+
     return(
         <SearchLabel>
             <input onChange={(e) => props.handleChange(e.target.value)} type="text" placeholder="Pesquisar produto"/>
