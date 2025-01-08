@@ -84,11 +84,11 @@ const Header: React.FC = () => {
       <HeaderStyle>
         <ContainerHeader>
           <ContainerLogo>Logo</ContainerLogo>
-
+{/* 
           <SearchInput
             value={search}
             handleChange={setSearch}
-          />
+          /> */}
 
           <ContainerCart onClick={handleOpenCart}>
             <ImgCart src={imgCart} alt="Carrinho" />
