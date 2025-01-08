@@ -45,7 +45,7 @@ Persistência de Dados: A persistência do carrinho com LocalStorage foi uma sol
 UI/UX: Melhorei minhas habilidades de design, utilizando Skeleton Loading para uma melhor experiência de carregamento e garantindo que o layout seja totalmente responsivo.
 
 Próximos Passos e Melhorias:
-Filtro de Busca Avançado: Embora já tenha sido implementado um filtro básico para pesquisa de produtos, o próximo passo seria expandir essa funcionalidade para incluir filtros mais avançados, como filtragem por categoria, faixa de preço e classificação. Isso permitiria uma busca mais refinada e personalizada para os usuários, proporcionando uma experiência de compra mais eficiente.
+Filtro de Busca Avançado: Embora já tenha sido implementado boa parte do código, precisa-se finaliza-lo, o próximo passo também seria expandir essa funcionalidade para incluir filtros mais avançados, como filtragem por categoria, faixa de preço e classificação. Isso permitiria uma busca mais refinada e personalizada para os usuários, proporcionando uma experiência de compra mais eficiente.
 
 Autenticação de Usuários: Implementação de um sistema de login e cadastro para permitir uma experiência personalizada para os usuários, com funcionalidades como histórico de compras, recomendações e carrinho salvo por usuário.
 
