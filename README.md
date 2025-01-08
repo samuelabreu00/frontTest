@@ -62,13 +62,23 @@ Este projeto me proporcionou uma excelente oportunidade de aprender e aplicar Ty
 Estou ansioso para continuar aprimorando minhas habilidades, explorando novas funcionalidades e aplicando TypeScript em projetos mais complexos no futuro.
 
 #Tecnologias Usadas:
+
 ReactJS
+
 TypeScript
+
 Axios
+
 React Query (useQuery)
+
 ContextAPI
+
 LocalStorage
+
 Skeleton Loading
+
 CSS/Styled Components
+
 FakeStore API
+
 JavaScript
