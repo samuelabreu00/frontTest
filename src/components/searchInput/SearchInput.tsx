@@ -4,8 +4,11 @@ import { InputHTMLAttributes } from "react";
 
 
 const SearchLabel = styled.div`
-width: 450px;
+width: 400px;
 position: relative;
+@media (max-width: 650px) {
+    width: 200px;
+  }
 >input{
   width: 100%;
   height: 40px;

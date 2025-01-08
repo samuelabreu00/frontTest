@@ -42,6 +42,9 @@ const ContainerLogo = styled.div`
   font-size: 2rem;
   color: #fff;
   font-weight: bold;
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 
 const ContainerCart = styled.div`
@@ -54,6 +57,7 @@ const ContainerCart = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+ 
 `;
 
 const ImgCart = styled.img`
