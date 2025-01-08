@@ -30,7 +30,6 @@ interface Products {
   id: number;
   title: string;
   brand: string;
-  description: string;
   price: number;
   image: string;
 }

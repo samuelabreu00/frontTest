@@ -66,12 +66,13 @@ const NumberCart = styled.p`
 `;
 
 const Header: React.FC = () => {
-  const cartContext = useContext(CartContext);
-  if (!cartContext) return null;
 
-  const {setSearch, search} = useFilter();
   
+  const {setSearch, search} = useFilter();
+  const cartContext = useContext(CartContext);
 
+  if (!cartContext) return null;
+  
   const { productsCart } = cartContext;
   const totalItems = productsCart.reduce((total, product) => total + product.quantity, 0);
 

@@ -13,8 +13,8 @@ function App() {
     <CartProvider>
       <FilterContextProvider>
         <Header />
-      </FilterContextProvider>
-      <Products />
+        <Products />
+      </FilterContextProvider>  
       <Footer />
     </CartProvider>
   </QueryClientProvider>
