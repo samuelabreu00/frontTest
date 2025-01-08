@@ -115,7 +115,6 @@ const Desconto = styled.div`
 
 interface CartProductProps{
   title: string;
-  description: string;
   brand: string;
   price: number;
   id: number;
