@@ -11,6 +11,7 @@ Skeleton - Técnica para melhorar a experiência do usuário durante o carregame
 CSS (ou Styled Components) - Para tornar a aplicação responsiva e esteticamente agradável.
 
 Principais Funcionalidades:
+
 🛍️ Listagem de Produtos Dinâmicos com useQuery
 A aplicação consome dados da FakeStore API para exibir uma listagem dinâmica de produtos, com informações como nome, preço, descrição e imagens. Para realizar as requisições HTTP, utilizei Axios em conjunto com React Query (useQuery), o que facilita o gerenciamento do estado de carregamento, erro e cache, garantindo uma experiência de navegação mais eficiente e sem re-fetching desnecessário.
 Além disso, a tipagem do TypeScript ajuda a garantir que os dados recebidos da API estejam corretos e facilita a manutenção do código.
