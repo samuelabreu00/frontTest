@@ -1,12 +1,17 @@
 import { createContext, ReactNode, useState } from "react";
 
-export const FilterContext = createContext({
+interface FilterContextType{
+    search: string,
+    setSearch: (value: string) => void;
+}
+
+export const FilterContext = createContext<FilterContextType>({
     search: '',
-    setSearch: (value: string) => {},
+    setSearch: () => {},
 })
 
 interface ProviderProps{
-    children: ReactNode
+    children: ReactNode;
 }
 
 export function FilterContextProvider({children}: ProviderProps){
