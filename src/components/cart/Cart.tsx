@@ -14,6 +14,9 @@ const Section = styled.section`
   padding: 33px 10px 0 0;
   box-shadow: -5px 0 6px 0 #00000051;
   z-index: 10;
+  @media (max-width: 700px) {
+    width: 100%;
+  }
 `;
 const Adc = styled.p`
   color: #bebebe;

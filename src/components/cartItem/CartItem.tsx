@@ -15,6 +15,9 @@ justify-content: center;
 gap: 2.5rem;
 align-items: center;
 position: relative;
+@media (max-width: 700px) {
+    gap: .5rem;
+  }
 
 `
 const ImgExemple = styled.img`
