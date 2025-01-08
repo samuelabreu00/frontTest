@@ -73,7 +73,7 @@ const Header: React.FC = () => {
 
   if (!cartContext) return null;
   const { productsCart } = cartContext;
-  const totalItems = productsCart.reduce((total, product) => total + product.quantity, 0);
+  const totalItems = productsCart.length;
 
   const { isCartVisible, handleOpenCart, handleCloseCart } = useCart();
 

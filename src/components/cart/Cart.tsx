@@ -66,6 +66,9 @@ const Title = styled.h1`
   font-weight: 700;
   font-size: 27px;
   color: #fff;
+  >span{
+    font-size: 17px;
+  }
 `;
 
 const ButtonX = styled.button`
@@ -129,12 +132,16 @@ const Cart: React.FC<CartProps> = ({ handleCloseCart }) => {
     0
   );
 
+  const itemText =
+    productsCart.length === 1
+      ? `${productsCart.length} Item Adicionado`
+      : `${productsCart.length} Itens Adicionados`;
 
 
   return (
     <Section>
       <HeaderCart>
-          <Title>Carrinho de Compras</Title>
+          <Title>Carrinho de Compras <br /><span>{productsCart.length > 0 ? itemText : null}</span></Title>
           <ButtonX onClick={handleCloseCart}>X</ButtonX>
         </HeaderCart>
 
